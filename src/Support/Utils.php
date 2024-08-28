@@ -27,9 +27,9 @@ class Utils
         return config('filament-tree.column_name.title', 'title');
     }
 
-    public static function defaultParentId(): int
+    public static function defaultParentId(): int|null
     {
-        return (int) config('filament-tree.default_parent_id', -1);
+        return config('filament-tree.default_parent_id', -1);
     }
 
     public static function defaultChildrenKeyName(): string
