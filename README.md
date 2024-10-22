@@ -123,6 +123,10 @@ class ProductCategory extends Model
 
     protected $fillable = ["parent_id", "title", "order"];
 
+    protected $casts = [
+        'parent_id' => 'int'
+    ];
+    
     protected $table = 'product_categories';
 }
 ```
