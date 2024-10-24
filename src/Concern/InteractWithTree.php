@@ -88,6 +88,11 @@ trait InteractWithTree
         return false;
     }
 
+    public function getTreeRootLevelKey(): null|string|int
+    {
+        return Utils::defaultParentId();
+    }
+
     /**
      * Update the tree list.
      */
@@ -98,8 +103,10 @@ trait InteractWithTree
             $records = $this->getRecords()->keyBy(fn ($record) => $record->getAttributeValue($record->getKeyName()));
 
             $unnestedArr = [];
-            $defaultParentId = Utils::defaultParentId();
+            $defaultParentId = $this->getTreeRootLevelKey();
+
             $this->unnestArray($unnestedArr, $list, $defaultParentId);
+
             $unnestedArrData = collect($unnestedArr)
                 ->map(fn (array $data, $id) => ['data' => $data, 'model' => $records->get($id)])
                 ->filter(fn (array $arr) => !is_null($arr['model']));
