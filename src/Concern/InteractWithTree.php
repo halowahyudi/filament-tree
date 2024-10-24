@@ -5,6 +5,7 @@ namespace SolutionForest\FilamentTree\Concern;
 use Closure;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use SolutionForest\FilamentTree\Components\Tree;
 use SolutionForest\FilamentTree\Concern\HasActions;
 use SolutionForest\FilamentTree\Concern\HasRecords;
@@ -63,6 +64,11 @@ trait InteractWithTree
             return '';
         }
         return $record->{(method_exists($record, 'determineTitleColumnName') ? $record->determineTitleColumnName() : 'title')};
+    }
+
+    public function getTreeRecordDescription(?Model $record = null): string|HtmlString|null
+    {
+        return null;
     }
 
     public function getTreeRecordIcon(?Model $record = null): ?string

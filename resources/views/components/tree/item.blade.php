@@ -1,7 +1,7 @@
 @php use Illuminate\Database\Eloquent\Model; @endphp
 @php use Filament\Facades\Filament; @endphp
 @php use SolutionForest\FilamentTree\Components\Tree; @endphp
-@props(['record', 'containerKey', 'tree', 'title' => null, 'icon' => null])
+@props(['record', 'containerKey', 'tree', 'title' => null, 'icon' => null, 'description' => null])
 @php
     /** @var $record Model */
     /** @var $containerKey string */
@@ -36,18 +36,11 @@
         </button>
 
         <div class="dd-content dd-nodrag flex gap-1">
-            @if ($icon)
-                <div class="w-4">
-                    <x-dynamic-component :component="$icon" class="w-4 h-4"/>
-                </div>
-            @endif
 
-            <span @class([
-                'ml-4 rtl:mr-4' => !$icon,
-                'font-semibold'
-            ])>
-                {{ $title }}
-            </span>
+            <x-filament-tree::tree.item-display 
+                class="ml-1 rtl:mr-1"
+                :record="$record" :title="$title" :icon="$icon" :description="$description"
+            />
 
             <div @class(['dd-item-btns', 'hidden' => !count($children), 'flex items-center justify-center pl-3'])>
                 <button data-action="expand" @class(['hidden' => !$collapsed])>
